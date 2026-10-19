@@ -108,7 +108,7 @@ input[type=range]{width:100%;accent-color:var(--chrome)}
 .think b{display:block;font:500 12px var(--f-mono);letter-spacing:.08em;color:var(--chrome);margin-bottom:4px}
 .try{font-size:14px;color:var(--swirl)}
 @media (max-width:900px){
-  #view-cosmos{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(320px,62%) minmax(0,1fr)}
+  #view-cosmos{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(440px,72%) minmax(0,1fr)}
   .c-info{border-left:0;border-top:1px solid var(--line);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 }
 @media (max-width:560px){ .brand span{display:none} nav.tabs{margin-left:0} }
@@ -123,6 +123,42 @@ input[type=range]{width:100%;accent-color:var(--chrome)}
 .join-card .url{font:13px var(--f-mono);color:var(--muted);word-break:break-all;margin:10px 0 18px}
 .join-card ol{margin:0 0 18px;padding-left:20px;color:var(--ink)}
 @media (max-width:700px){.join-card{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}.join-card ol{text-align:left}}
+.modal{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(5,10,28,.78);backdrop-filter:blur(5px);padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.modal-card{background:var(--deep);border:1px solid var(--line);border-radius:18px;padding:22px;max-height:100%;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.modal-card h3{font-family:var(--f-display);font-size:22px;color:var(--cream);margin:0 0 6px;text-wrap:balance}
+.modal-card.ask{width:min(420px,100%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.modal-card.ask .row{width:100%}
+.modal-card.ask .row > *{flex:1}
+.ask-thumb{width:160px;height:160px;border-radius:14px;background:radial-gradient(circle,#1a3270,#0d1c42);object-fit:contain}
+.modal-card.big{width:min(1100px,100%);display:flex;flex-direction:column;gap:14px}
+.big-stage{background:radial-gradient(circle at 50% 45%,#1d3878 0%,#0a1530 75%);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:12px}
+.big-img{width:min(68vh,100%);aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 0 18px rgba(247,236,196,.45))}
+.big-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.big-title{font-family:var(--f-display);font-size:28px;color:var(--cream)}
+.submit.small{font-size:16px;padding:10px 18px;border-radius:10px}
+.btn.danger{color:#ffb4a2;border-color:rgba(255,180,162,.4)}
+.submit.danger-fill{background:#e0503c;color:#fff;box-shadow:none}
+.modal-card.manage{width:min(980px,100%)}
+.manage-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.thumb-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.thumb-card img{width:100%;aspect-ratio:1;object-fit:contain;border-radius:8px;background:radial-gradient(circle,#1a3270,#0d1c42);cursor:zoom-in}
+.thumb-name{font-weight:600;color:var(--cream);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumb-card .note{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.small-btn{padding:6px 8px;font-size:13px;margin-top:4px}
+.c-tip{position:absolute;z-index:6;max-width:300px;background:rgba(10,21,48,.94);border:1px solid rgba(242,194,58,.5);border-radius:12px;padding:10px 12px;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.tip-name{font-family:var(--f-display);font-size:18px;color:var(--cream)}
+.tip-name span{font:500 12px var(--f-mono);color:var(--muted)}
+.tip-row{font:500 12px var(--f-mono);color:var(--chrome);margin:2px 0 4px}
+.tip-fact{font-size:13px;color:var(--ink)}
+.c-ctrl input[type=date],.c-ctrl input[type=time]{font:13px var(--f-mono);color:var(--ink);background:var(--deep);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.c-info h2 .la{font:500 14px var(--f-mono);color:var(--muted)}
+.star-list li{align-items:start}
+.star-list b{display:block;color:var(--cream);font-weight:600}
+.star-list small{display:block;color:var(--muted);font-size:13px;line-height:1.45}
+.story{margin-top:16px;padding:16px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+.story p{font-family:var(--f-display);font-size:16px;line-height:1.75}
+.c-info .row{margin-top:8px}
 </style>
 </head>
 <body>
@@ -190,12 +226,13 @@ input[type=range]{width:100%;accent-color:var(--chrome)}
           <button class="btn" id="gJoin">학생 접속 QR</button>
           <button class="btn" id="gNames" aria-pressed="true">이름 숨기기</button>
           <button class="btn" id="gFull">전체 화면</button>
-          <button class="btn danger" id="gClear">모두 지우기</button>
+          <button class="btn danger" id="gClear">그림 정리 · 지우기</button>
         </div>
       </div>
       <div class="g-caption" id="gCaption" hidden><div class="k">방금 도착한 별</div><div class="v" id="gCapText"></div></div>
       <div class="g-demo" id="gDemo">지금 보이는 별은 <b>예시</b>예요. 학생이 ‘은하로 보내기’를 누르면 그 그림이 은하에 들어옵니다.</div>
       <div class="g-tip" id="gTip" hidden></div>
+      <div class="modal" id="modal" hidden role="dialog" aria-modal="true"><div class="modal-card" id="modalCard"></div></div>
       <div class="join" id="joinOverlay" hidden>
         <div class="join-card">
           <div class="qr" id="qrBox" aria-label="학생 접속 QR 코드"></div>
@@ -216,13 +253,16 @@ input[type=range]{width:100%;accent-color:var(--chrome)}
       <div class="c-stage" id="cStage">
         <canvas id="cCv"></canvas>
         <div class="c-scenes" role="tablist" id="cScenes">
-          <button data-scene="expand" role="tab">팽창하는 우주</button>
+          <button data-scene="sky" role="tab">별자리 하늘</button>
+          <button data-scene="solar" role="tab">태양계</button>
           <button data-scene="rotate" role="tab">은하의 회전</button>
+          <button data-scene="expand" role="tab">팽창하는 우주</button>
           <button data-scene="bh" role="tab">블랙홀</button>
           <button data-scene="micro" role="tab">별빛 휘어짐</button>
           <button data-scene="cluster" role="tab">은하단 렌즈</button>
         </div>
         <div class="c-ctrl" id="cCtrl"></div>
+        <div class="c-tip" id="cTip" hidden></div>
       </div>
       <aside class="c-info" id="cInfo"></aside>
     </section>
@@ -368,6 +408,10 @@ async function fbTeacher(code){
   }catch(e){ setPill('Firebase 연결 실패','local'); }
 }
 
+async function deleteItem(id){
+  if(TRANSPORT==='firebase' && data.code){ try{ const db=await fbDb(); await db.ref('rooms/'+data.code+'/drawings/'+id).remove(); }catch(e){} }
+  data.items=data.items.filter(i=>i.id!==id); saveTeacherItems(); emit();
+}
 async function clearAll(){
   if(TRANSPORT==='firebase' && data.code){ try{ const db=await fbDb(); for(const it of data.items){ await db.ref('rooms/'+data.code+'/drawings/'+it.id).remove(); } }catch(e){} }
   data.items=[]; saveTeacherItems(); emit();
@@ -644,21 +688,107 @@ function drawFg(now){
   });
   if(G.tip){ const h=G.hit.find(o=>o.item.id===G.tip.id); const tip=$('#gTip'); if(h && now<G.tip.until){ tip.hidden=false; tip.style.left=h.x+'px'; tip.style.top=(h.y-h.s*0.5)+'px'; } else { tip.hidden=true; G.tip=null; } }
 }
-$('#gFg').addEventListener('click', e=>{
-  const r=G.fg.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
-  const h=[...G.hit].reverse().find(o=>Math.abs(o.x-x)<o.s*0.45 && Math.abs(o.y-y)<o.s*0.45);
-  if(h){ G.tip={id:h.item.id, until:performance.now()+4000}; $('#gTip').textContent=`${h.item.name} · 「${h.item.title}」`; }
-});
 $('#gNames').onclick=e=>{ G.showNames=!G.showNames; e.target.textContent=G.showNames?'이름 숨기기':'이름 보이기'; e.target.setAttribute('aria-pressed',G.showNames); };
 $('#gFull').onclick=()=>{ const el=$('#view-galaxy'); if(document.fullscreenElement) document.exitFullscreen().catch(()=>{}); else (el.requestFullscreen?el.requestFullscreen():Promise.reject()).catch(()=>toast('이 화면에서는 전체 화면을 쓸 수 없어요. 브라우저 확대(F11)를 써 보세요.')); };
 document.addEventListener('fullscreenchange', ()=>setTimeout(()=>G.resize(),60));
 $('#gJoin').onclick=()=>{ $('#joinOverlay').hidden=false; };
 $('#joinClose').onclick=()=>{ $('#joinOverlay').hidden=true; };
-let clearArm=0;
-$('#gClear').onclick=async e=>{
-  if(Date.now()-clearArm>4000){ clearArm=Date.now(); e.target.textContent='한 번 더 누르면 모두 지워져요'; setTimeout(()=>{ if(Date.now()-clearArm>=4000) e.target.textContent='모두 지우기'; },4100); return; }
-  clearArm=0; e.target.textContent='지우는 중…'; await clearAll(); e.target.textContent='모두 지우기'; $('#gCaption').hidden=true; G.seen=new Set(); toast('은하를 비웠어요.');
-};
+/* ---- 교사 화면 창(크게 보기 / 그림 정리) ---- */
+function h(tag, attrs, ...kids){
+  const e=document.createElement(tag);
+  for(const k in (attrs||{})){ const v=attrs[k]; if(k==='class') e.className=v; else if(k.startsWith('on')) e.addEventListener(k.slice(2),v); else if(v!==false && v!=null) e.setAttribute(k,v); }
+  for(const kid of kids.flat()){ if(kid==null||kid===false) continue; e.appendChild(typeof kid==='string'?document.createTextNode(kid):kid); }
+  return e;
+}
+const M={ view:null };
+function openModal(kind, build){ const c=$('#modalCard'); c.className='modal-card '+kind; c.innerHTML=''; build(c); $('#modal').hidden=false; M.view=kind; const f=c.querySelector('[data-focus]')||c.querySelector('button'); if(f) f.focus(); }
+function closeModal(){ $('#modal').hidden=true; M.view=null; }
+$('#modal').addEventListener('click',e=>{ if(e.target.id==='modal') closeModal(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#modal').hidden) closeModal(); });
+function imgOf(item){ if(!item.img && item.canvas) item.img=item.canvas.toDataURL('image/png'); return item.img; }
+function shownList(){ return G.hit.map(o=>o.item); }
+
+function askBig(item){
+  openModal('ask', c=>{
+    c.append(
+      h('img',{class:'ask-thumb',src:imgOf(item),alt:''}),
+      h('h3',{}, `「${item.title}」을(를) 크게 보겠습니까?`),
+      h('p',{class:'note'}, item.name==='예시' ? '예시 별이에요' : `${item.name} 학생의 별`),
+      h('div',{class:'row'},
+        h('button',{class:'submit','data-focus':'1',onclick:()=>bigView(item)},'예'),
+        h('button',{class:'btn',onclick:closeModal},'아니오'))
+    );
+  });
+}
+function bigView(item){
+  const list=shownList(); let idx=Math.max(0,list.findIndex(i=>i.id===item.id));
+  const render=()=>openModal('big', c=>{
+    const it=list[idx]||item, real=!String(it.id).startsWith('demo');
+    let armed=false;
+    const del=real ? h('button',{class:'btn danger',onclick:async e=>{
+      if(!armed){ armed=true; e.currentTarget.textContent='한 번 더 누르면 지워져요'; return; }
+      await deleteItem(it.id); toast(`「${it.title}」을(를) 지웠어요.`); closeModal(); }},'이 그림 지우기') : null;
+    c.append(
+      h('div',{class:'big-stage'}, h('img',{class:'big-img',src:imgOf(it),alt:`${it.name}의 그림 ${it.title}`})),
+      h('div',{class:'big-meta'},
+        h('div',{}, h('div',{class:'big-title'}, `「${it.title}」`), h('div',{class:'note'}, it.name==='예시'?'예시 별':`${it.name} 학생`)),
+        h('div',{class:'row'},
+          list.length>1 ? h('button',{class:'btn',onclick:()=>{ idx=(idx-1+list.length)%list.length; render(); }},'◀ 이전') : null,
+          list.length>1 ? h('button',{class:'btn',onclick:()=>{ idx=(idx+1)%list.length; render(); }},'다음 ▶') : null,
+          del,
+          h('button',{class:'submit small','data-focus':'1',onclick:closeModal},'닫기')))
+    );
+  });
+  render();
+}
+$('#gFg').addEventListener('click', e=>{
+  const r=G.fg.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  const hit=[...G.hit].reverse().find(o=>Math.abs(o.x-x)<o.s*0.45 && Math.abs(o.y-y)<o.s*0.45);
+  if(hit) askBig(hit.item);
+});
+$('#gFg').addEventListener('pointermove', e=>{
+  const r=G.fg.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  G.fg.style.cursor = G.hit.some(o=>Math.abs(o.x-x)<o.s*0.45 && Math.abs(o.y-y)<o.s*0.45) ? 'pointer' : '';
+});
+
+function openManager(){
+  openModal('manage', c=>{
+    const items=data.items;
+    const head=h('div',{class:'manage-head'},
+      h('h3',{}, `그림 정리 · ${items.length}장`),
+      h('div',{class:'row'},
+        items.length ? h('button',{class:'btn danger',onclick:confirmAll},'모두 지우기') : null,
+        h('button',{class:'btn','data-focus':'1',onclick:closeModal},'닫기')));
+    c.append(head);
+    if(!items.length){ c.append(h('p',{class:'note'},'아직 받은 그림이 없어요. 학생이 그림을 보내면 여기에서 하나씩 지울 수 있어요.')); return; }
+    const grid=h('div',{class:'thumbs'});
+    items.slice().reverse().forEach(it=>{
+      let armed=false;
+      grid.append(h('div',{class:'thumb-card'},
+        h('img',{src:it.img,alt:'',onclick:()=>bigView(it)}),
+        h('div',{class:'thumb-name'}, it.title),
+        h('div',{class:'note'}, it.name),
+        h('button',{class:'btn small-btn',onclick:async e=>{
+          if(!armed){ armed=true; e.currentTarget.textContent='확인'; e.currentTarget.classList.add('danger'); return; }
+          await deleteItem(it.id); openManager(); }},'지우기')));
+    });
+    c.append(grid);
+  });
+}
+function confirmAll(){
+  const n=data.items.length;
+  openModal('ask', c=>{
+    c.append(
+      h('h3',{}, `그림 ${n}장을 모두 지울까요?`),
+      h('p',{class:'note'},'지운 그림은 되돌릴 수 없어요.'),
+      h('div',{class:'row'},
+        h('button',{class:'submit danger-fill',onclick:async e=>{ e.currentTarget.disabled=true; e.currentTarget.textContent='지우는 중…'; await clearAll(); $('#gCaption').hidden=true; G.seen=new Set(); closeModal(); toast('은하를 비웠어요.'); }},'예, 모두 지우기'),
+        h('button',{class:'btn','data-focus':'1',onclick:openManager},'아니오'))
+    );
+  });
+}
+$('#gClear').onclick=openManager;
+data.listeners.add(()=>{ if(M.view==='manage') openManager(); });
 
 /* ================= COSMOS ================= */
 const C={ cv:$('#cCv'), w:0,h:0,dpr:1, scene:'expand', t:0, paused:false };
@@ -669,46 +799,76 @@ C.resize=function(){
   Lens.setup(); Rot.setup();
 };
 const INFO={
-expand:`<div class="eyebrow">장면 1 · 우주 팽창</div><h2>우주는 지금도 부풀고 있어요</h2>
+sky:`<div class="eyebrow">장면 1 · 별자리 하늘</div><h2>오늘 밤, 우리 하늘의 별자리</h2>
+<p>실제 별의 위치로 계산한 우리나라 중부(북위 36.6°)의 밤하늘이에요. 바닥에 누워 하늘을 올려다본 모습이라 <b>가운데가 머리 꼭대기</b>, 둥근 테두리가 지평선이고, 동쪽이 왼쪽에 있어요.</p>
+<p>별에 마우스를 올리거나 손가락으로 누르면 <b>별 이름</b>이 나오고, 누르면 오른쪽에 그 <b>별자리 이야기</b>가 열려요.</p>
+<ul class="facts"><li><span>공식 별자리 수</span><span>88개</span></li><li><span>북극성 높이</span><span>약 37° (그 지역 위도와 같음)</span></li><li><span>하늘이 한 바퀴 도는 시간</span><span>약 23시간 56분</span></li></ul>
+<p class="try">‘시간 흐르기’를 켜면 별들이 북극성을 중심으로 동쪽에서 서쪽으로 도는 <b>일주 운동</b>을 볼 수 있어요. 계절 버튼으로 봄·여름·가을·겨울 하늘도 비교해 보세요.</p>
+<div class="think"><b>생각해 보기</b>왜 계절마다 저녁에 보이는 별자리가 달라질까요? (힌트: 지구는 1년에 한 바퀴 태양 둘레를 돌아요)</div>`,
+solar:`<div class="eyebrow">장면 2 · 태양계</div><h2>태양 둘레를 도는 여덟 행성</h2>
+<p>태양계의 행성들은 모두 <b>같은 방향(북쪽에서 볼 때 시계 반대 방향)</b>으로 태양 둘레를 돌아요. 태양에서 멀수록 더 천천히, 더 오래 걸려 한 바퀴를 돌지요.</p>
+<p>행성에 마우스를 올리거나 손가락으로 누르면 이름과 특징이 나와요. 지구 옆의 작은 점은 달이에요.</p>
+<ul class="facts"><li><span>1 AU (천문단위)</span><span>약 1억 5천만 km</span></li><li><span>수성 한 바퀴</span><span>약 88일</span></li><li><span>지구 한 바퀴</span><span>약 365일</span></li><li><span>해왕성 한 바퀴</span><span>약 165년</span></li></ul>
+<p class="try">‘실제 거리 비율’을 켜 보세요. 안쪽 행성들이 태양 곁에 몰려 있고, 바깥쪽은 얼마나 넓은 공간인지 보여요. 화성과 목성 사이의 점들은 소행성대예요.</p>
+<div class="think"><b>생각해 보기</b>태양에서 멀수록 공전이 느린 까닭은 무엇일까요?</div>`,
+expand:`<div class="eyebrow">장면 4 · 우주 팽창</div><h2>우주는 지금도 부풀고 있어요</h2>
 <p>멀리 있는 은하일수록 더 빠르게 우리에게서 멀어집니다. 이것을 <b>허블 법칙</b>이라고 해요. 은하가 공간 속을 달려가는 것이라기보다, 은하 사이의 <b>공간 자체가 늘어나는</b> 것이에요. 화면의 격자가 함께 늘어나는 것을 보세요.</p>
 <p>아무 은하나 눌러 그 은하를 ‘우리 은하’로 바꿔 보세요. 어디에서 보든 다른 은하가 모두 멀어져요. 우주에는 특별한 중심이 없습니다.</p>
 <ul class="facts"><li><span>우주의 나이</span><span>약 138억 년</span></li><li><span>허블 상수</span><span>약 70 km/s/Mpc</span></li><li><span>1 Mpc(메가파섹)</span><span>약 326만 광년</span></li><li><span>멀어지는 은하의 빛</span><span>붉게 보임(적색 편이)</span></li></ul>
 <p class="try">화살표 길이 = 멀어지는 빠르기. 거리가 2배면 화살표도 2배예요.</p>
 <div class="think"><b>생각해 보기</b>풍선에 점을 찍고 불면 점들은 어떻게 될까요? 풍선 표면 위에 ‘중심’이 있나요?</div>`,
-rotate:`<div class="eyebrow">장면 2 · 은하의 회전</div><h2>우리은하는 거대한 소용돌이예요</h2>
+rotate:`<div class="eyebrow">장면 3 · 은하의 회전</div><h2>우리은하는 거대한 소용돌이예요</h2>
 <p>우리은하는 별 수천억 개가 모인 <b>막대 나선 은하</b>예요. 태양도 은하 중심을 돌고 있어서, 우리는 지금 이 순간에도 엄청난 속도로 움직이고 있어요.</p>
 <p>보이는 별과 가스만 있다면 바깥쪽 별은 태양계 행성처럼 <b>느리게</b> 돌아야 해요. 그런데 실제로 재 보면 바깥쪽 별도 거의 같은 빠르기로 돕니다. 눈에 보이지 않는 질량, <b>암흑 물질</b>이 있다는 증거예요.</p>
 <ul class="facts"><li><span>우리은하 지름</span><span>약 10만 광년</span></li><li><span>태양 ~ 은하 중심</span><span>약 2만 6천 광년</span></li><li><span>태양의 공전 속도</span><span>약 220 km/s</span></li><li><span>한 바퀴 도는 시간</span><span>약 2억 년 이상</span></li></ul>
 <p class="try">‘암흑 물질’ 버튼을 꺼서 바깥쪽 별들이 어떻게 달라지는지 보세요. 오른쪽 아래 그래프도 함께 바뀌어요.</p>
 <div class="think"><b>생각해 보기</b>나선 팔은 왜 계속 감겨서 사라지지 않을까요? (힌트: 팔은 별의 ‘교통 체증’ 같은 무늬예요)</div>`,
-bh:`<div class="eyebrow">장면 3 · 블랙홀</div><h2>빛도 빠져나올 수 없는 곳</h2>
+bh:`<div class="eyebrow">장면 5 · 블랙홀</div><h2>빛도 빠져나올 수 없는 곳</h2>
 <p>아주 무거운 별이 일생의 마지막에 무너지면 <b>블랙홀</b>이 될 수 있어요. 어느 경계(<b>사건의 지평선</b>) 안으로 들어가면 빛조차 빠져나오지 못해 검은 <b>그림자</b>로 보입니다.</p>
 <p>블랙홀 둘레의 가스는 빠르게 돌며 뜨거워져 밝게 빛나는 <b>강착 원반</b>을 만들어요. 원반의 왼쪽이 더 밝은 이유는 그쪽 가스가 우리 쪽으로 다가오기 때문이에요. 블랙홀 뒤쪽 원반이 위로 휘어 보이는 것은 중력이 빛의 길을 휘게 하기 때문입니다.</p>
 <ul class="facts"><li><span>우리은하 중심 블랙홀</span><span>궁수자리 A*</span></li><li><span>그 질량</span><span>태양의 약 400만 배</span></li><li><span>첫 블랙홀 그림자 사진</span><span>2019년 · M87*</span></li><li><span>우리은하 블랙홀 사진</span><span>2022년</span></li></ul>
 <p class="try">블랙홀을 손가락으로 끌어 보세요. 뒤쪽 별빛이 고리 모양으로 휘어요. ‘중력 끄기’로 원래 하늘과 비교해 보세요.</p>
 <div class="think"><b>생각해 보기</b>빛을 내지 않는 블랙홀을 과학자들은 어떻게 찾아낼까요?</div>`,
-micro:`<div class="eyebrow">장면 4 · 중력 렌즈</div><h2>무거운 것은 모두 빛을 휘게 해요</h2>
+micro:`<div class="eyebrow">장면 6 · 중력 렌즈</div><h2>무거운 것은 모두 빛을 휘게 해요</h2>
 <p>아인슈타인의 <b>일반 상대성 이론</b>에 따르면 질량은 공간을 휘게 하고, 빛은 휘어진 공간을 따라 나아가요. 그래서 별 하나도 작은 돋보기처럼 뒤쪽 빛을 휘게 합니다.</p>
 <p>1919년 개기 일식 때 태양 근처에 보이는 별들의 위치가 살짝 옮겨진 것이 관측되어 이 이론이 확인되었어요. 별이 다른 별 앞을 지나가면 뒤의 별이 잠깐 밝아지는데(<b>미세 중력 렌즈</b>), 이 방법으로 보이지 않는 행성도 찾아냅니다.</p>
 <ul class="facts"><li><span>태양 가장자리에서 빛이 휘는 각</span><span>약 1.75″</span></li><li><span>확인된 해</span><span>1919년</span></li></ul>
 <p class="try">노란 별 하나를 끌어서 다른 별빛 앞을 지나가게 해 보세요. 질량을 키우면 휘는 정도가 커져요.</p>
 <div class="think"><b>생각해 보기</b>빛은 질량이 없는데 왜 중력의 영향을 받을까요?</div>`,
-cluster:`<div class="eyebrow">장면 5 · 은하단 렌즈</div><h2>은하단은 우주의 거대한 돋보기</h2>
+cluster:`<div class="eyebrow">장면 7 · 은하단 렌즈</div><h2>은하단은 우주의 거대한 돋보기</h2>
 <p>은하가 수백~수천 개 모인 <b>은하단</b>은 질량이 매우 커서, 그 뒤에 있는 먼 은하의 빛을 크게 휘게 합니다. 그래서 먼 은하가 <b>활 모양</b>으로 늘어나거나, 바로 뒤에 있으면 <b>아인슈타인 고리</b>로 보여요.</p>
 <p>빛이 얼마나 휘었는지 재면 은하단 전체의 질량을 알 수 있어요. 그렇게 재 보니 보이는 물질보다 훨씬 많은 질량이 있었고, 이것도 암흑 물질의 증거가 되었습니다.</p>
 <ul class="facts"><li><span>은하단 속 은하 수</span><span>수백 ~ 수천 개</span></li><li><span>질량에서 암흑 물질 비율</span><span>약 80% 이상</span></li></ul>
 <p class="try">‘고리 표시’를 켜고 은하단을 끌어 파란 배경 은하 바로 앞에 놓아 보세요.</p>
 <div class="think"><b>생각해 보기</b>렌즈 덕분에 너무 멀어서 보이지 않던 은하가 보이게 돼요. 이것이 천문학자에게 어떤 도움이 될까요?</div>`};
 
+function band(){ const st=$('#cStage').getBoundingClientRect(), a=$('#cScenes').getBoundingClientRect(), b=$('#cCtrl').getBoundingClientRect();
+  return { top: a.bottom-st.top+8, bottom: (b.height? b.top-st.top : st.height)-8 }; }
 function setScene(s){
   C.scene=s; document.querySelectorAll('#cScenes button').forEach(b=>b.setAttribute('aria-selected', b.dataset.scene===s));
-  $('#cInfo').innerHTML=INFO[s]; $('#cInfo').scrollTop=0; buildCtrl(); if(['bh','micro','cluster'].includes(s)) Lens.setup();
+  $('#cTip').hidden=true; Solar.hover=null; Sky.hover=null; if(s==='sky') skyInfo(); else $('#cInfo').innerHTML=INFO[s]; $('#cInfo').scrollTop=0; buildCtrl(); if(['bh','micro','cluster'].includes(s)) Lens.setup();
 }
 document.querySelectorAll('#cScenes button').forEach(b=>b.onclick=()=>setScene(b.dataset.scene));
 function btn(label,pressed,on){ const b=document.createElement('button'); b.className='btn'; b.textContent=label; if(pressed!==null) b.setAttribute('aria-pressed',pressed); b.onclick=()=>on(b); return b; }
 function buildCtrl(){
   const box=$('#cCtrl'); box.innerHTML='';
   box.appendChild(btn(C.paused?'재생':'일시 정지',null,b=>{ C.paused=!C.paused; b.textContent=C.paused?'재생':'일시 정지'; }));
+  if(C.scene==='solar'){
+    box.appendChild(btn('실제 거리 비율',Solar.real,b=>{ Solar.real=!Solar.real; b.setAttribute('aria-pressed',Solar.real); }));
+    const l=document.createElement('label'); l.innerHTML='빠르기 <input type="range" id="solarSpeed" min="2" max="400">'; box.appendChild(l);
+    const sp=l.querySelector('input'); sp.value=Solar.speed; sp.oninput=()=>Solar.speed=+sp.value;
+  }
+  if(C.scene==='sky'){
+    if(!Sky.date) Sky.init();
+    const l=document.createElement('label'); l.innerHTML='<input type="date" id="skyDate" aria-label="날짜"> <input type="time" id="skyTime" step="600" aria-label="시각">'; box.appendChild(l);
+    const apply=()=>{ const dv=$('#skyDate').value, tv=$('#skyTime').value; if(!dv||!tv) return; const [Y,Mo,D]=dv.split('-').map(Number), [H,Mi]=tv.split(':').map(Number); Sky.date=new Date(Y,Mo-1,D,H,Mi); };
+    l.querySelector('#skyDate').onchange=apply; l.querySelector('#skyTime').onchange=apply;
+    box.appendChild(btn('시간 흐르기',Sky.play,b=>{ Sky.play=!Sky.play; b.setAttribute('aria-pressed',Sky.play); }));
+    [['봄',4,15],['여름',7,15],['가을',10,15],['겨울',1,15]].forEach(([n,m,d])=>box.appendChild(btn(n,null,()=>{ Sky.date=new Date(Sky.date.getFullYear(),m-1,d,21,0); Sky.play=false; buildCtrl(); })));
+    box.appendChild(btn('선',Sky.lines,b=>{ Sky.lines=!Sky.lines; b.setAttribute('aria-pressed',Sky.lines); }));
+    box.appendChild(btn('이름',Sky.names,b=>{ Sky.names=!Sky.names; b.setAttribute('aria-pressed',Sky.names); }));
+    syncSkyCtrl();
+  }
   if(C.scene==='expand'){
     box.appendChild(btn('처음부터',null,()=>Exp.reset()));
     box.appendChild(btn('격자 보기',Exp.grid,b=>{ Exp.grid=!Exp.grid; b.setAttribute('aria-pressed',Exp.grid); }));
@@ -858,11 +1018,261 @@ const Lens={ gravity:true, ring:false, mass:0.5, lenses:[], drag:null, src:docum
   },
   pick(px,py){ const k=C.w/this.lw, x=px/k, y=py/k; let best=null,bd=1e9; for(const l of this.lenses){ const d=Math.hypot(l.x-x,l.y-y); if(d<bd){bd=d;best=l;} } return bd*k<120?best:null; }
 };
+/* --- solar system --- */
+const PLANETS=[
+  {ko:'수성',en:'Mercury',a:0.39,p:87.97,d:0.38,c:'#b9b1a6',fact:'태양에 가장 가까운 행성. 공기가 거의 없어 낮과 밤의 온도 차가 아주 커요.'},
+  {ko:'금성',en:'Venus',a:0.72,p:224.7,d:0.95,c:'#e9c98a',fact:'두꺼운 이산화 탄소 대기 때문에 표면이 약 460°C로 가장 뜨거운 행성. 새벽·저녁에 가장 밝게 보여요(샛별·개밥바라기).'},
+  {ko:'지구',en:'Earth',a:1.00,p:365.26,d:1.00,c:'#5b9be6',fact:'액체 상태의 물이 있고 생명이 사는 유일한 행성(지금까지 알려진 바). 위성은 달 하나.'},
+  {ko:'화성',en:'Mars',a:1.52,p:686.98,d:0.53,c:'#d9653b',fact:'표면의 산화 철 때문에 붉게 보여요. 태양계에서 가장 높은 화산 올림푸스산이 있어요.'},
+  {ko:'목성',en:'Jupiter',a:5.20,p:4332.6,d:11.21,c:'#d8b48a',fact:'태양계에서 가장 큰 행성. 지구보다 큰 폭풍 ‘대적점’이 수백 년째 불고 있어요.'},
+  {ko:'토성',en:'Saturn',a:9.58,p:10759,d:9.45,c:'#e6d29a',ring:true,fact:'얼음과 암석 조각으로 된 아름다운 고리가 있어요. 평균 밀도가 물보다 작아요.'},
+  {ko:'천왕성',en:'Uranus',a:19.2,p:30687,d:4.01,c:'#9fe0e6',fact:'자전축이 약 98° 기울어 거의 누운 채로 돌아요. 메테인 때문에 청록색으로 보여요.'},
+  {ko:'해왕성',en:'Neptune',a:30.07,p:60190,d:3.88,c:'#4e74e8',fact:'태양에서 가장 먼 행성. 태양계에서 가장 강한 바람이 불어요. 한 바퀴 도는 데 약 165년.'}
+];
+const Solar={ days:0, speed:20, real:false, hover:null, pos:[],
+  draw(c,dt){
+    if(!C.paused) this.days += dt*this.speed*(reduceMotion?0.5:1);
+    const B=band(), cx=C.w*0.5, cy=(B.top+B.bottom)/2, sq=0.62, R=Math.max(60,Math.min(C.w*0.46, ((B.bottom-B.top)/2-14)/sq));
+    c.fillStyle='#03061a'; c.fillRect(0,0,C.w,C.h);
+    // faint background stars
+    if(!this.bg){ this.bg=[]; for(let i=0;i<260;i++) this.bg.push([Math.random(),Math.random(),Math.random()]); }
+    for(const [x,y,b] of this.bg){ c.globalAlpha=0.15+b*0.5; c.fillStyle='#dfe8ff'; c.fillRect(x*C.w,y*C.h,1.2,1.2); } c.globalAlpha=1;
+    const rad=(i,a)=> this.real ? R*0.05 + R*0.95*(a/30.07) : R*(0.17+i*0.118);
+    // asteroid belt
+    const rb1=this.real? R*0.05+R*0.95*(2.2/30.07) : (rad(3)+rad(4))/2-R*0.025, rb2=this.real? R*0.05+R*0.95*(3.3/30.07) : (rad(3)+rad(4))/2+R*0.025;
+    if(!this.belt){ this.belt=[]; for(let i=0;i<420;i++) this.belt.push([Math.random(),Math.random()*6.283,0.3+Math.random()*0.7]); }
+    for(const [u,a0,b] of this.belt){ const r=rb1+(rb2-rb1)*u, a=a0+this.days*2*Math.PI/1680; c.globalAlpha=0.35*b; c.fillStyle='#b7a990'; c.fillRect(cx+Math.cos(a)*r, cy+Math.sin(a)*r*sq,1.3,1.3); }
+    c.globalAlpha=1;
+    // orbits
+    PLANETS.forEach((p,i)=>{ const r=rad(i,p.a); c.strokeStyle= this.hover===p ? 'rgba(242,194,58,.8)' : 'rgba(163,179,216,.22)'; c.lineWidth=this.hover===p?1.6:1; c.beginPath(); c.ellipse(cx,cy,r,r*sq,0,0,7); c.stroke(); });
+    // sun
+    const sr=Math.max(10,R*0.055);
+    const sg=c.createRadialGradient(cx,cy,0,cx,cy,sr*3.4); sg.addColorStop(0,'#fffbe6'); sg.addColorStop(0.28,'#ffd45a'); sg.addColorStop(0.55,'rgba(242,150,40,.35)'); sg.addColorStop(1,'rgba(242,150,40,0)');
+    c.fillStyle=sg; c.beginPath(); c.arc(cx,cy,sr*3.4,0,7); c.fill();
+    c.fillStyle='#ffd45a'; c.beginPath(); c.arc(cx,cy,sr,0,7); c.fill();
+    // planets: draw back half first for depth
+    this.pos=[{p:{ko:'태양',en:'Sun',sun:true,fact:'태양계 질량의 약 99.8%를 차지하는 별. 중심에서 수소가 헬륨으로 바뀌는 핵융합으로 빛과 열을 내요.'},x:cx,y:cy,s:sr}];
+    const items=PLANETS.map((p,i)=>{ const r=rad(i,p.a), ang=-this.days*2*Math.PI/p.p + i*0.9; return {p,i,x:cx+Math.cos(ang)*r,y:cy+Math.sin(ang)*r*sq,s:Math.max(3,2.4+Math.sqrt(p.d)*3.2)*(R/360),ang}; });
+    items.sort((a,b)=>a.y-b.y);
+    for(const o of items){
+      const {p,x,y,s}=o;
+      if(p.ring){ c.strokeStyle='rgba(230,210,154,.75)'; c.lineWidth=Math.max(1.5,s*0.35); c.beginPath(); c.ellipse(x,y,s*2.1,s*0.75,-0.35,0,7); c.stroke(); }
+      const g=c.createRadialGradient(x-s*0.35,y-s*0.35,s*0.1,x,y,s); g.addColorStop(0,'#ffffff'); g.addColorStop(0.25,p.c); g.addColorStop(1,shade(p.c,-0.55)); c.fillStyle=g; c.beginPath(); c.arc(x,y,s,0,7); c.fill();
+      if(p.en==='Earth'){ const ma=-this.days*2*Math.PI/27.32, mr=s*2.6; c.fillStyle='#cfd2d8'; c.beginPath(); c.arc(x+Math.cos(ma)*mr,y+Math.sin(ma)*mr*0.8,Math.max(1.5,s*0.28),0,7); c.fill(); }
+      if(this.hover===p){ c.strokeStyle='#f2c23a'; c.lineWidth=2; c.beginPath(); c.arc(x,y,s+6,0,7); c.stroke(); }
+      c.font='500 12px '+getComputedStyle(document.body).fontFamily; c.textAlign='center'; c.fillStyle='rgba(234,240,251,.75)'; c.fillText(p.ko,x,y+s+15);
+      this.pos.push(o);
+    }
+    const yrs=Math.floor(this.days/365.25), dd=Math.floor(this.days-yrs*365.25);
+    c.font='500 13px "IBM Plex Mono",monospace'; c.textAlign='right'; c.fillStyle='rgba(234,240,251,.85)';
+    c.fillText(`지구 시간으로 ${yrs}년 ${dd}일 지남`, C.w-16, B.bottom-4);
+    c.fillText(this.real?'거리: 실제 비율 (크기는 과장)':'거리: 보기 좋게 간격 조정 (크기는 과장)', C.w-16, B.bottom-22);
+  },
+  pick(x,y){ let best=null,bd=1e9; for(const o of this.pos){ const d=Math.hypot(o.x-x,o.y-y)-o.s; if(d<bd){bd=d;best=o;} } return bd<14?best:null; }
+};
+function showSolarTip(o, x, y){
+  const t=$('#cTip');
+  if(!o){ t.hidden=true; Solar.hover=null; return; }
+  Solar.hover=o.p.sun?null:o.p;
+  const p=o.p; t.innerHTML='';
+  t.append(h('div',{class:'tip-name'}, p.ko, h('span',{}, ' '+p.en)));
+  if(!p.sun) t.append(h('div',{class:'tip-row'}, `태양까지 ${p.a} AU · 공전 주기 ${p.p<1000? Math.round(p.p)+'일' : (p.p/365.25).toFixed(1)+'년'} · 지름 지구의 ${p.d}배`));
+  t.append(h('div',{class:'tip-fact'}, p.fact));
+  placeTip(t,x,y);
+}
+function placeTip(t,x,y){ t.hidden=false; const W=$('#cStage').clientWidth; const tw=t.offsetWidth; t.style.left=clamp(x+14,8,W-tw-8)+'px'; t.style.top=Math.max(8,y-t.offsetHeight-12)+'px'; }
+
+/* --- constellation sky --- */
+// 별 좌표: 적경(시, 소수), 적위(도), 겉보기 등급. J2000 기준 근삿값.
+const hm=(h,m)=>h+m/60, dm=(d,m)=>d<0||Object.is(d,-0)?d-m/60:d+m/60;
+const CONS=[
+{id:'uma',ko:'큰곰자리',la:'Ursa Major',season:'봄 · 북쪽 하늘에서 일 년 내내',
+ stars:{a:[hm(11,3.7),dm(61,45),1.8,'두베','‘곰의 등’이라는 뜻'],b:[hm(11,1.8),dm(56,23),2.4,'메라크','‘허리’라는 뜻'],g:[hm(11,53.8),dm(53,42),2.4,'페크다','‘넓적다리’라는 뜻'],d:[hm(12,15.4),dm(57,2),3.3,'메그레즈','‘꼬리의 뿌리’라는 뜻'],e:[hm(12,54.0),dm(55,58),1.8,'알리오트','북두칠성에서 가장 밝은 별'],z:[hm(13,23.9),dm(54,56),2.2,'미자르','옆의 희미한 알코르와 함께 옛날 시력 검사에 쓰였어요'],h:[hm(13,47.5),dm(49,19),1.9,'알카이드','‘우두머리’라는 뜻. 국자 손잡이 끝']},
+ lines:[['a','b'],['b','g'],['g','d'],['d','a'],['d','e'],['e','z'],['z','h']],
+ story:['님프 칼리스토는 제우스의 사랑을 받아 아들 아르카스를 낳았어요. 이를 질투한 헤라는 칼리스토를 곰으로 바꾸어 버렸지요.','세월이 흘러 사냥꾼이 된 아르카스는 숲에서 곰이 된 어머니를 만났지만 알아보지 못하고 활을 겨누었어요. 이를 본 제우스가 두 사람을 하늘로 올려 큰곰자리와 작은곰자리로 만들었다고 해요. 곰의 꼬리가 유난히 긴 것은 제우스가 꼬리를 잡고 휙 던져 올렸기 때문이라고 해요.','우리 조상들은 국자 모양의 일곱 별을 북두칠성이라 부르며 사람의 수명과 복을 맡은 별로 여겼어요. 국자 끝의 두 별(메라크→두베)을 다섯 배 늘이면 북극성을 찾을 수 있어요.']},
+{id:'umi',ko:'작은곰자리',la:'Ursa Minor',season:'일 년 내내 · 북쪽 하늘',
+ stars:{a:[hm(2,31.8),dm(89,16),2.0,'북극성 (폴라리스)','지구 자전축이 가리키는 곳 가까이 있어 거의 움직이지 않아요'],d:[hm(17,32.2),dm(86,35),4.4,'일둔','‘변함없는’이라는 뜻'],e:[hm(16,46.0),dm(82,2),4.2,'',''],z:[hm(15,44.1),dm(77,48),4.3,'',''],b:[hm(14,50.7),dm(74,9),2.1,'코카브','약 3천 년 전에는 이 별이 북극성 역할을 했어요'],g:[hm(15,20.7),dm(71,50),3.0,'페르카드','‘송아지’라는 뜻'],h:[hm(16,17.5),dm(75,45),5.0,'','']},
+ lines:[['a','d'],['d','e'],['e','z'],['z','b'],['b','g'],['g','h'],['h','z']],
+ story:['큰곰이 된 칼리스토의 아들 아르카스가 바로 작은곰자리예요. 어머니 곁에서 함께 북극 하늘을 돌고 있지요.','작은곰 꼬리 끝의 북극성은 밤새 거의 제자리에 있어서, 옛날 뱃사람과 여행자들의 길잡이가 되었어요. 북극성의 고도는 그곳의 위도와 거의 같아서, 우리나라 중부에서는 약 37° 높이에 보여요.']},
+{id:'cas',ko:'카시오페이아자리',la:'Cassiopeia',season:'가을 · 북쪽 하늘에서 일 년 내내',
+ stars:{b:[hm(0,9.2),dm(59,9),2.3,'카프','‘손’이라는 뜻'],a:[hm(0,40.5),dm(56,32),2.2,'셰다르','‘가슴’이라는 뜻'],g:[hm(0,56.7),dm(60,43),2.4,'','W 모양의 가운데 별'],d:[hm(1,25.8),dm(60,14),2.7,'루크바','‘무릎’이라는 뜻'],e:[hm(1,54.4),dm(63,40),3.4,'세긴','']},
+ lines:[['b','a'],['a','g'],['g','d'],['d','e']],
+ story:['카시오페이아는 에티오피아의 왕비였어요. 딸 안드로메다가 바다의 요정들보다 아름답다고 자랑하다가 바다의 신 포세이돈을 화나게 했지요.','벌로 카시오페이아는 의자에 묶인 채 하늘에 올려졌고, 북극성 둘레를 돌며 때로는 거꾸로 매달린 모습이 되어요. W(또는 M) 모양의 가운데 꼭짓점들을 이어 늘이면 북극성을 찾을 수 있어요.']},
+{id:'and',ko:'안드로메다자리',la:'Andromeda',season:'가을 저녁',
+ stars:{a:[hm(0,8.4),dm(29,5),2.1,'알페라츠','‘말의 배꼽’이라는 뜻. 페가수스 사각형의 한 꼭짓점'],d:[hm(0,39.3),dm(30,52),3.3,'',''],b:[hm(1,9.7),dm(35,37),2.1,'미라크','‘허리띠’라는 뜻'],g:[hm(2,3.9),dm(42,20),2.1,'알마크','망원경으로 보면 노랑·파랑 두 별']},
+ lines:[['a','d'],['d','b'],['b','g']],
+ story:['포세이돈이 보낸 바다 괴물을 달래기 위해 공주 안드로메다는 바닷가 바위에 쇠사슬로 묶였어요.','그때 메두사를 물리치고 돌아오던 영웅 페르세우스가 메두사의 머리로 괴물을 돌로 만들고 공주를 구했어요. 두 사람은 결혼했고, 아테나 여신이 이 가족을 모두 하늘의 별자리로 만들었다고 해요.','미라크 근처에 희미하게 보이는 안드로메다은하는 약 250만 광년 떨어져 있어, 맨눈으로 볼 수 있는 가장 먼 천체 가운데 하나예요.']},
+{id:'peg',ko:'페가수스자리',la:'Pegasus',season:'가을 저녁 · 높은 하늘',
+ stars:{a:[hm(23,4.8),dm(15,12),2.5,'마르카브','‘안장’이라는 뜻'],b:[hm(23,3.8),dm(28,5),2.4,'셰아트','‘정강이’라는 뜻. 붉은 거성'],g:[hm(0,13.2),dm(15,11),2.8,'알게니브','‘옆구리’라는 뜻'],e:[hm(21,44.2),dm(9,52),2.4,'에니프','‘코’라는 뜻'],z:[hm(22,41.5),dm(10,50),3.4,'호맘',''],t:[hm(22,10.0),dm(6,12),3.5,'비함',''],h:[hm(22,43.0),dm(30,13),2.9,'마타르','‘행운의 비’라는 뜻']},
+ lines:[['a','b'],['b','and:a'],['and:a','g'],['g','a'],['a','z'],['z','t'],['t','e'],['b','h']],
+ story:['페르세우스가 메두사의 목을 베었을 때 흘러내린 피에서 날개 달린 하얀 말 페가수스가 태어났어요.','뒤에 영웅 벨레로폰이 페가수스를 타고 괴물 키마이라를 물리쳤지만, 신들의 세계까지 날아오르려다 떨어지고 말았어요. 페가수스만 하늘에 올라 별자리가 되었지요.','페가수스의 몸통을 이루는 큰 네모는 ‘가을의 대사각형’이라고 불러요. 가을 별자리를 찾는 출발점이에요.']},
+{id:'per',ko:'페르세우스자리',la:'Perseus',season:'가을 ~ 겨울 저녁',
+ stars:{a:[hm(3,24.3),dm(49,52),1.8,'미르파크','‘팔꿈치’라는 뜻'],b:[hm(3,8.2),dm(40,57),2.1,'알골','‘악마의 머리’. 약 2.87일마다 어두워졌다 밝아지는 식쌍성'],g:[hm(3,4.8),dm(53,30),2.9,'',''],d:[hm(3,42.9),dm(47,47),3.0,'',''],e:[hm(3,58.0),dm(40,1),2.9,'',''],z:[hm(3,54.1),dm(31,53),2.9,'','']},
+ lines:[['g','a'],['a','d'],['d','e'],['e','z'],['a','b']],
+ story:['페르세우스는 제우스의 아들로, 바라보는 사람을 돌로 만드는 괴물 메두사를 물리친 영웅이에요. 방패에 비친 모습만 보며 다가가 메두사의 목을 베었지요.','별자리에서 페르세우스는 한 손에 메두사의 머리를 들고 있는데, 그 눈에 해당하는 별이 알골이에요. 알골은 두 별이 서로를 가리며 돌아서 밝기가 규칙적으로 변해요. 옛사람들은 이것을 괴물이 눈을 깜빡이는 것으로 생각했어요.','매년 8월 중순에는 이 별자리 쪽에서 별똥별이 쏟아지는 페르세우스자리 유성우를 볼 수 있어요.']},
+{id:'cyg',ko:'백조자리',la:'Cygnus',season:'여름 ~ 가을 저녁',
+ stars:{a:[hm(20,41.4),dm(45,17),1.3,'데네브','‘꼬리’라는 뜻. 여름의 대삼각형 한 꼭짓점'],g:[hm(20,22.2),dm(40,15),2.2,'사드르','‘가슴’이라는 뜻'],b:[hm(19,30.7),dm(27,58),3.1,'알비레오','부리. 망원경으로 보면 노랑·파랑 두 별'],e:[hm(20,46.2),dm(33,58),2.5,'기에나','‘날개’라는 뜻'],d:[hm(19,45.0),dm(45,8),2.9,'','']},
+ lines:[['a','g'],['g','b'],['d','g'],['g','e']],
+ story:['제우스가 스파르타의 왕비 레다를 만나러 갈 때 하얀 백조로 변신했다는 이야기가 있어요. 또 다른 이야기에서는 리라의 명수 오르페우스가 죽은 뒤 백조가 되어 친구인 거문고자리 옆에 놓였다고 해요.','은하수 위를 날아가는 백조의 모습이 큰 십자가처럼 보여서 ‘북십자성’이라고도 불러요.']},
+{id:'lyr',ko:'거문고자리',la:'Lyra',season:'여름 ~ 가을 저녁',
+ stars:{a:[hm(18,36.9),dm(38,47),0.0,'베가 (직녀성)','약 25광년 거리. 여름의 대삼각형 한 꼭짓점'],e:[hm(18,44.3),dm(39,40),4.7,'',''],z:[hm(18,44.8),dm(37,36),4.3,'',''],b:[hm(18,50.1),dm(33,22),3.5,'셸리아크','‘거북’이라는 뜻'],g:[hm(18,59.0),dm(32,41),3.2,'술라파트',''],d:[hm(18,54.5),dm(36,54),4.3,'','']},
+ lines:[['a','z'],['z','b'],['b','g'],['g','d'],['d','z'],['a','e']],
+ story:['그리스 신화의 음악가 오르페우스가 타던 리라(작은 하프)예요. 오르페우스는 죽은 아내 에우리디케를 되찾으려고 저승까지 내려가 아름다운 연주로 저승의 왕을 감동시켰어요.','“지상에 닿을 때까지 뒤돌아보지 말라”는 약속을 받았지만, 마지막 순간 아내가 잘 따라오는지 걱정되어 뒤돌아보는 바람에 아내를 영영 잃고 말았지요.','우리나라에서는 베가를 직녀성이라 불러요. 은하수 건너편 독수리자리의 견우성과 일 년에 한 번 칠월 칠석에 오작교에서 만난다는 이야기가 전해져요.']},
+{id:'aql',ko:'독수리자리',la:'Aquila',season:'여름 ~ 가을 저녁',
+ stars:{a:[hm(19,50.8),dm(8,52),0.8,'알타이르 (견우성)','약 17광년 거리. 여름의 대삼각형 한 꼭짓점'],g:[hm(19,46.3),dm(10,37),2.7,'타라제드',''],b:[hm(19,55.3),dm(6,24),3.7,'알샤인',''],d:[hm(19,25.5),dm(3,7),3.4,'',''],z:[hm(19,5.4),dm(13,52),3.0,'',''],l:[hm(19,6.2),dm(-4,53),3.4,'',''],t:[hm(20,11.3),dm(-0,49),3.2,'','']},
+ lines:[['g','a'],['a','b'],['a','d'],['d','z'],['d','l'],['b','t']],
+ story:['제우스의 무기인 번개를 나르던 독수리예요. 제우스의 명령으로 아름다운 소년 가니메데스를 올림포스로 데려가 신들의 술 시중을 들게 했다고 해요.','우리나라에서는 알타이르를 견우성이라 불러요. 소를 치던 견우와 베를 짜던 직녀가 결혼한 뒤 일을 게을리하자 옥황상제가 은하수 양쪽으로 갈라놓았고, 칠월 칠석에만 까치와 까마귀가 놓아 준 오작교에서 만날 수 있게 되었다는 이야기예요.']},
+{id:'ori',ko:'오리온자리',la:'Orion',season:'겨울 저녁 (가을에는 새벽)',
+ stars:{a:[hm(5,55.2),dm(7,24),0.5,'베텔게우스','‘거인의 겨드랑이’. 태양보다 수백 배 큰 붉은 초거성'],b:[hm(5,14.5),dm(-8,12),0.1,'리겔','‘발’이라는 뜻. 푸르게 빛나는 초거성'],g:[hm(5,25.1),dm(6,21),1.6,'벨라트릭스','‘여전사’라는 뜻'],d:[hm(5,32.0),dm(-0,18),2.2,'민타카','삼태성(허리띠)의 하나'],e:[hm(5,36.2),dm(-1,12),1.7,'알닐람','삼태성(허리띠)의 가운데'],z:[hm(5,40.8),dm(-1,57),1.8,'알니탁','삼태성(허리띠)의 하나'],k:[hm(5,47.8),dm(-9,40),2.1,'사이프','‘칼’이라는 뜻'],l:[hm(5,35.1),dm(9,56),3.4,'메이사','머리']},
+ lines:[['a','g'],['a','l'],['l','g'],['g','d'],['a','z'],['d','e'],['e','z'],['d','b'],['z','k'],['b','k']],
+ story:['오리온은 바다의 신 포세이돈의 아들로, 그리스에서 가장 뛰어난 사냥꾼이었어요. 그런데 “세상의 모든 동물을 사냥할 수 있다”고 뽐내다가 대지의 여신의 노여움을 샀어요.','여신이 보낸 작은 전갈에게 발뒤꿈치를 찔려 오리온은 목숨을 잃었어요. 하늘에서도 오리온은 전갈을 피해, 전갈자리가 동쪽에서 떠오르면 서쪽으로 진답니다. 그래서 두 별자리는 같은 하늘에 함께 보이지 않아요.','허리띠의 나란한 세 별을 우리 조상들은 삼태성이라 불렀어요.']},
+{id:'tau',ko:'황소자리',la:'Taurus',season:'겨울 저녁 (가을 밤 늦게 떠요)',
+ stars:{a:[hm(4,35.9),dm(16,31),0.9,'알데바란','‘뒤따르는 자’. 플레이아데스를 뒤따라 떠요. 주황색 거성'],b:[hm(5,26.3),dm(28,36),1.7,'엘나트','‘들이받는 자’, 뿔 끝'],z:[hm(5,37.6),dm(21,9),3.0,'','다른 쪽 뿔 끝'],t:[hm(4,28.7),dm(15,52),3.4,'',''],g:[hm(4,19.8),dm(15,38),3.7,'',''],d:[hm(4,22.9),dm(17,33),3.8,'',''],e:[hm(4,28.6),dm(19,11),3.5,'',''],p:[hm(3,47.5),dm(24,6),2.9,'플레이아데스 성단 (좀생이별)','수백 개의 어린 별이 모인 산개 성단']},
+ lines:[['z','a'],['a','t'],['t','g'],['g','d'],['d','e'],['e','b']],
+ story:['제우스가 페니키아의 공주 에우로페에게 반해 하얀 황소로 변신했어요. 공주가 황소 등에 올라타자 황소는 바다를 건너 먼 섬까지 헤엄쳐 갔지요. 공주가 닿은 땅이 공주의 이름을 따 ‘유럽’이 되었다고 해요.','황소 어깨의 플레이아데스는 거인 아틀라스의 일곱 딸이에요. 우리 조상들은 좀생이별이라 부르며, 이 별과 달의 위치로 그해 농사가 잘될지 점치기도 했어요.']},
+{id:'gem',ko:'쌍둥이자리',la:'Gemini',season:'겨울 저녁',
+ stars:{a:[hm(7,34.6),dm(31,53),1.6,'카스토르','형. 여러 별이 모인 다중성'],b:[hm(7,45.3),dm(28,2),1.1,'폴룩스','동생. 쌍둥이자리에서 가장 밝은 별'],g:[hm(6,37.7),dm(16,24),1.9,'알헤나',''],e:[hm(6,43.9),dm(25,8),3.0,'메브수타',''],d:[hm(7,20.1),dm(21,59),3.5,'와사트',''],m:[hm(6,23.0),dm(22,31),2.9,'테자트','']},
+ lines:[['a','e'],['e','m'],['b','d'],['d','g'],['a','b']],
+ story:['카스토르와 폴룩스는 사이좋은 쌍둥이 형제였어요. 형 카스토르는 사람이었고, 제우스의 아들인 동생 폴룩스는 죽지 않는 몸이었지요.','싸움에서 형이 목숨을 잃자 폴룩스는 형과 함께할 수 없다면 영원한 생명도 필요 없다며 슬퍼했어요. 제우스는 형제의 우애에 감동하여 둘을 나란히 하늘의 별자리로 만들었어요.']},
+{id:'cma',ko:'큰개자리',la:'Canis Major',season:'겨울 저녁 · 남쪽 낮은 하늘',
+ stars:{a:[hm(6,45.1),dm(-16,43),-1.46,'시리우스','‘눈부신’이라는 뜻. 밤하늘에서 가장 밝은 별, 약 8.6광년'],b:[hm(6,22.7),dm(-17,57),2.0,'미르잠','‘알리는 자’. 시리우스보다 먼저 떠요'],e:[hm(6,58.6),dm(-28,58),1.5,'아다라',''],d:[hm(7,8.4),dm(-26,24),1.8,'웨젠',''],h:[hm(7,24.1),dm(-29,18),2.4,'알루드라','']},
+ lines:[['b','a'],['a','d'],['d','e'],['d','h']],
+ story:['사냥꾼 오리온을 따르던 충직한 사냥개라고 해요. 하늘에서도 주인 오리온의 뒤를 따라 떠오르지요.','고대 이집트 사람들은 새벽에 시리우스가 해보다 조금 먼저 떠오르기 시작하면 곧 나일강이 넘쳐 땅이 기름지게 된다는 것을 알고, 이것으로 한 해의 시작을 정했어요.']},
+{id:'cmi',ko:'작은개자리',la:'Canis Minor',season:'겨울 저녁',
+ stars:{a:[hm(7,39.3),dm(5,14),0.4,'프로키온','‘개보다 앞서’. 시리우스보다 먼저 떠요. 겨울의 대삼각형 한 꼭짓점'],b:[hm(7,27.2),dm(8,17),2.9,'고메이사','']},
+ lines:[['a','b']],
+ story:['오리온의 또 다른 사냥개, 혹은 사냥꾼 악타이온의 개라고도 해요. 베텔게우스·시리우스·프로키온을 이으면 ‘겨울의 대삼각형’이 돼요.']},
+{id:'leo',ko:'사자자리',la:'Leo',season:'봄 저녁',
+ stars:{a:[hm(10,8.4),dm(11,58),1.4,'레굴루스','‘작은 왕’이라는 뜻. 사자의 심장'],b:[hm(11,49.1),dm(14,34),2.1,'데네볼라','‘사자의 꼬리’라는 뜻'],g:[hm(10,20.0),dm(19,51),2.0,'알기에바','‘이마’라는 뜻'],d:[hm(11,14.1),dm(20,31),2.6,'조스마','‘허리’라는 뜻'],t:[hm(11,14.2),dm(15,26),3.3,'',''],h:[hm(10,7.3),dm(16,46),3.5,'',''],e:[hm(9,45.9),dm(23,46),3.0,'',''],m:[hm(9,52.8),dm(26,0),3.9,'',''],z:[hm(10,16.7),dm(23,25),3.4,'아다페라','']},
+ lines:[['a','h'],['h','g'],['g','z'],['z','m'],['m','e'],['g','d'],['d','b'],['b','t'],['t','a'],['d','t']],
+ story:['영웅 헤라클레스가 해낸 열두 가지 과업 가운데 첫 번째가 네메아 골짜기의 사자를 물리치는 일이었어요. 이 사자는 가죽이 너무 단단해서 칼도 화살도 들어가지 않았지요.','헤라클레스는 맨손으로 사자를 붙잡아 이겼고, 그 가죽을 갑옷처럼 입고 다녔어요. 사자의 머리 부분 별들은 물음표를 뒤집은 낫 모양이에요.']},
+{id:'boo',ko:'목동자리',la:'Boötes',season:'봄 ~ 초여름 저녁',
+ stars:{a:[hm(14,15.7),dm(19,11),-0.05,'아르크투루스','‘곰을 지키는 자’. 주황색 거성, 약 37광년'],e:[hm(14,45.0),dm(27,4),2.4,'이자르','‘허리띠’'],g:[hm(14,32.1),dm(38,18),3.0,'세기누스',''],b:[hm(15,1.9),dm(40,23),3.5,'네카르',''],d:[hm(15,15.5),dm(33,19),3.5,'',''],r:[hm(14,31.8),dm(30,22),3.6,'',''],h:[hm(13,54.7),dm(18,24),2.7,'무프리드','']},
+ lines:[['a','e'],['e','d'],['d','b'],['b','g'],['g','r'],['r','a'],['a','h']],
+ story:['큰곰을 뒤쫓으며 지키는 목동, 또는 큰곰자리 칼리스토의 아들 아르카스라고도 해요.','북두칠성 손잡이의 휘어진 곡선을 그대로 이어 가면 주황빛 아르크투루스를 지나 처녀자리의 스피카에 닿아요. 이 곡선을 ‘봄의 대곡선’이라고 불러요.']},
+{id:'vir',ko:'처녀자리',la:'Virgo',season:'봄 저녁',
+ stars:{a:[hm(13,25.2),dm(-11,10),1.0,'스피카','‘보리 이삭’이라는 뜻. 푸른빛의 밝은 별'],g:[hm(12,41.7),dm(-1,27),2.7,'포리마',''],e:[hm(13,2.2),dm(10,58),2.8,'빈데미아트릭스','‘포도 따는 여인’'],d:[hm(12,55.6),dm(3,24),3.4,'',''],b:[hm(11,50.7),dm(1,46),3.6,'자위자와',''],z:[hm(13,34.7),dm(-0,36),3.4,'','']},
+ lines:[['b','g'],['g','a'],['g','d'],['d','e'],['d','z'],['z','a']],
+ story:['곡식의 여신 데메테르, 또는 그 딸 페르세포네의 모습이라고 해요. 저승의 신 하데스가 페르세포네를 데려가자 슬픔에 잠긴 데메테르가 돌보지 않아 땅에 곡식이 자라지 않았어요.','결국 페르세포네는 한 해의 일부만 저승에서 지내게 되었고, 그동안은 어머니가 슬퍼해 겨울이 된다고 옛사람들은 계절을 설명했어요. 여신이 들고 있는 보리 이삭이 스피카예요.']},
+{id:'sco',ko:'전갈자리',la:'Scorpius',season:'여름 저녁 · 남쪽 낮은 하늘',
+ stars:{a:[hm(16,29.4),dm(-26,26),1.0,'안타레스','‘화성의 경쟁자’. 화성처럼 붉은 초거성'],b:[hm(16,5.4),dm(-19,48),2.6,'아크라브',''],d:[hm(16,0.3),dm(-22,37),2.3,'주바',''],p:[hm(15,58.9),dm(-26,7),2.9,'',''],s:[hm(16,21.2),dm(-25,36),2.9,'',''],t:[hm(16,35.9),dm(-28,13),2.8,'',''],e:[hm(16,50.2),dm(-34,18),2.3,'',''],m:[hm(16,51.9),dm(-38,3),3.0,'',''],z:[hm(16,54.6),dm(-42,22),3.6,'',''],h:[hm(17,12.2),dm(-43,14),3.3,'',''],th:[hm(17,37.3),dm(-43,0),1.9,'사르가스',''],i:[hm(17,47.6),dm(-40,8),3.0,'',''],k:[hm(17,42.5),dm(-39,2),2.4,'',''],l:[hm(17,33.6),dm(-37,6),1.6,'샤울라','‘들어 올린 꼬리’. 독침']},
+ lines:[['b','d'],['d','p'],['d','s'],['s','a'],['a','t'],['t','e'],['e','m'],['m','z'],['z','h'],['h','th'],['th','i'],['i','k'],['k','l']],
+ story:['자만한 사냥꾼 오리온을 벌하기 위해 보내진 전갈이에요. 오리온을 쓰러뜨린 공으로 하늘에 올랐지만, 오리온과는 하늘의 반대편에 놓여 둘은 결코 함께 보이지 않아요.','전갈의 심장에서 붉게 빛나는 안타레스는 태양보다 수백 배 큰 별이에요. 우리 조상들은 이 별을 ‘대화(大火)’라 부르기도 했어요.']},
+{id:'sgr',ko:'궁수자리',la:'Sagittarius',season:'여름 저녁 · 남쪽 낮은 하늘',
+ stars:{e:[hm(18,24.2),dm(-34,23),1.8,'카우스 아우스트랄리스','‘활의 남쪽’'],s:[hm(18,55.3),dm(-26,18),2.0,'눈키',''],ph:[hm(18,45.7),dm(-26,59),3.2,'',''],d:[hm(18,21.0),dm(-29,50),2.7,'카우스 메디아','‘활의 가운데’'],l:[hm(18,28.0),dm(-25,25),2.8,'카우스 보레알리스','‘활의 북쪽’'],z:[hm(19,2.6),dm(-29,53),2.6,'아스켈라',''],t:[hm(19,6.9),dm(-27,40),3.3,'',''],g:[hm(18,5.8),dm(-30,25),3.0,'알나슬','‘화살촉’']},
+ lines:[['g','d'],['d','e'],['e','z'],['z','ph'],['ph','d'],['d','l'],['l','ph'],['ph','s'],['s','t'],['t','z']],
+ story:['반은 사람, 반은 말인 켄타우로스가 활을 겨누는 모습이에요. 지혜로운 켄타우로스 케이론은 아킬레우스, 헤라클레스 같은 영웅들의 스승이었다고 해요.','궁수자리 쪽은 우리은하의 중심 방향이라 은하수가 가장 두껍고 밝게 보여요. 은하 중심의 블랙홀 ‘궁수자리 A*’의 이름도 여기서 왔어요. 우리 조상들은 국자 모양의 여섯 별을 남두육성이라 부르며 삶을 맡은 별로 여겼어요.']}
+];
+// 별자리 밖의 이름난 천체
+const DSO=[{ra:hm(0,42.7),dec:dm(41,16),name:'안드로메다은하 (M31)',note:'약 250만 광년. 우리은하 옆의 큰 나선 은하',con:'and'}];
+const STARCOL={'ori:a':'#ffb07a','sco:a':'#ff8a6a','tau:a':'#ffc48a','boo:a':'#ffc98f','ori:b':'#b8d4ff','lyr:a':'#d8e6ff','cma:a':'#e8f0ff','vir:a':'#bcd4ff','peg:b':'#ffc49a'};
+const LAT=36.6, LON=127.5;
+const Sky={ date:null, lines:true, names:true, play:false, sel:null, hover:null, pts:[], bgStars:null, mw:null,
+  init(){ const d=new Date(); d.setHours(21,0,0,0); this.date=d;
+    let s=12345; const rnd=()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+    this.bgStars=[]; for(let i=0;i<900;i++){ const ra=rnd()*24, dec=Math.asin(2*rnd()-1)*180/Math.PI; this.bgStars.push([ra,dec,4+rnd()*2.5]); }
+    this.mw=[]; const dG=27.12825*Math.PI/180, aG=192.85948, lN=122.93192;
+    for(let l=0;l<=360;l+=3){ for(const b of [-6,0,6]){ const L=(lN-l)*Math.PI/180, B=b*Math.PI/180;
+      const sd=Math.sin(B)*Math.sin(dG)+Math.cos(B)*Math.cos(dG)*Math.cos(L);
+      const ra=(aG+Math.atan2(Math.cos(B)*Math.sin(L), Math.sin(B)*Math.cos(dG)-Math.cos(B)*Math.sin(dG)*Math.cos(L))*180/Math.PI+720)%360;
+      const bright=0.45+0.55*Math.pow(Math.cos(((l>180?l-360:l))*Math.PI/360),2)*(b===0?1:0.6);
+      this.mw.push([ra/15, Math.asin(sd)*180/Math.PI, bright]); } }
+  },
+  lst(){ const jd=this.date.getTime()/86400000+2440587.5; return ((280.46061837+360.98564736629*(jd-2451545)+LON)%360+360)%360; },
+  altaz(ra,dec,lst){ const H=(lst-ra*15)*Math.PI/180, d=dec*Math.PI/180, f=LAT*Math.PI/180;
+    const sa=Math.sin(f)*Math.sin(d)+Math.cos(f)*Math.cos(d)*Math.cos(H); const alt=Math.asin(sa);
+    const az=Math.atan2(-Math.sin(H)*Math.cos(d), Math.cos(f)*Math.sin(d)-Math.sin(f)*Math.cos(d)*Math.cos(H));
+    return [alt*180/Math.PI, az]; },
+  draw(c,dt){
+    if(!this.date) this.init();
+    if(this.play && !C.paused){ this.date=new Date(this.date.getTime()+dt*3600*1000*(reduceMotion?0.4:1)); syncSkyCtrl(); }
+    const B=band(), cy=(B.top+B.bottom)/2, cx=C.w/2, R=Math.max(60,Math.min(C.w*0.46-18, (B.bottom-B.top)/2-18)), lst=this.lst();
+    this.cx=cx; this.cy=cy; this.R=R;
+    c.fillStyle='#02040c'; c.fillRect(0,0,C.w,C.h);
+    const sg=c.createRadialGradient(cx,cy,0,cx,cy,R); sg.addColorStop(0,'#0b1838'); sg.addColorStop(0.85,'#0a1530'); sg.addColorStop(1,'#14284f');
+    c.fillStyle=sg; c.beginPath(); c.arc(cx,cy,R,0,7); c.fill();
+    const proj=(ra,dec)=>{ const [alt,az]=this.altaz(ra,dec,lst); if(alt<0) return null; const r=(90-alt)/90*R; return [cx-r*Math.sin(az), cy-r*Math.cos(az), alt]; };
+    c.save(); c.beginPath(); c.arc(cx,cy,R,0,7); c.clip();
+    // milky way
+    c.globalCompositeOperation='lighter';
+    for(const [ra,dec,b] of this.mw){ const p=proj(ra,dec); if(!p) continue; const rr=R*0.09; const g=c.createRadialGradient(p[0],p[1],0,p[0],p[1],rr); g.addColorStop(0,`rgba(150,170,230,${0.05*b})`); g.addColorStop(1,'rgba(150,170,230,0)'); c.fillStyle=g; c.fillRect(p[0]-rr,p[1]-rr,rr*2,rr*2); }
+    c.globalCompositeOperation='source-over';
+    // alt rings
+    c.strokeStyle='rgba(163,179,216,.12)'; c.lineWidth=1; for(const a of [30,60]){ c.beginPath(); c.arc(cx,cy,(90-a)/90*R,0,7); c.stroke(); }
+    // background stars
+    const k=R/330, tw=C.t;
+    for(const [ra,dec,m] of this.bgStars){ const p=proj(ra,dec); if(!p) continue; const ext=p[2]<15?0.5:1; c.globalAlpha=(0.25+(6.5-m)*0.22)*ext; c.fillStyle='#dfe8ff'; const s=Math.max(0.6,(6.6-m)*0.55*k); c.fillRect(p[0]-s/2,p[1]-s/2,s,s); }
+    c.globalAlpha=1;
+    // constellations
+    this.pts=[]; const P={};
+    for(const con of CONS) for(const key in con.stars){ const st=con.stars[key]; const p=proj(st[0],st[1]); if(p) P[con.id+':'+key]={x:p[0],y:p[1],alt:p[2],st,con,key}; }
+    if(this.lines){ for(const con of CONS){ const on=this.sel===con.id;
+      c.strokeStyle= on ? 'rgba(242,194,58,.95)' : 'rgba(126,166,222,.42)'; c.lineWidth= on?2.2:1.1;
+      for(const [u,v] of con.lines){ const A=P[u.includes(':')?u:con.id+':'+u], B=P[v.includes(':')?v:con.id+':'+v]; if(!A||!B) continue; c.beginPath(); c.moveTo(A.x,A.y); c.lineTo(B.x,B.y); c.stroke(); } } }
+    for(const id in P){ const o=P[id], m=o.st[2]; const s=Math.max(1.2,(5.2-m)*1.25*k); const col=STARCOL[id]||'#f4f7ff';
+      const ext=o.alt<12?0.55:1; const twk=1+0.12*Math.sin(tw*3+o.x*0.3);
+      const g=c.createRadialGradient(o.x,o.y,0,o.x,o.y,s*2.6*twk); g.addColorStop(0,col); g.addColorStop(0.35,col); g.addColorStop(1,'rgba(255,255,255,0)');
+      c.globalAlpha=ext; c.fillStyle=g; c.beginPath(); c.arc(o.x,o.y,s*2.6*twk,0,7); c.fill(); c.globalAlpha=1;
+      if(this.hover && this.hover.id===id){ c.strokeStyle='#f2c23a'; c.lineWidth=1.6; c.beginPath(); c.arc(o.x,o.y,s*2.6+5,0,7); c.stroke(); }
+      this.pts.push(Object.assign({id},o)); }
+    for(const d of DSO){ const p=proj(d.ra,d.dec); if(!p) continue; c.save(); c.translate(p[0],p[1]); c.rotate(0.6); c.scale(1,0.38); const g=c.createRadialGradient(0,0,0,0,0,9*k+5); g.addColorStop(0,'rgba(230,225,255,.8)'); g.addColorStop(1,'rgba(200,200,255,0)'); c.fillStyle=g; c.beginPath(); c.arc(0,0,9*k+5,0,7); c.fill(); c.restore(); this.pts.push({id:'dso',x:p[0],y:p[1],dso:d,st:[d.ra,d.dec,3.4,d.name,d.note],con:CONS.find(x=>x.id===d.con)}); }
+    // labels
+    if(this.names){ c.font='600 13px '+getComputedStyle(document.body).fontFamily; c.textAlign='center';
+      for(const con of CONS){ const vis=Object.keys(con.stars).map(kk=>P[con.id+':'+kk]).filter(Boolean); if(vis.length<2) continue;
+        let x=0,y=0; vis.forEach(v=>{x+=v.x;y+=v.y;}); x/=vis.length; y/=vis.length;
+        const on=this.sel===con.id; c.fillStyle= on?'#f2c23a':'rgba(247,236,196,.8)'; c.lineWidth=3; c.strokeStyle='rgba(2,4,12,.8)'; c.strokeText(con.ko,x,y-14); c.fillText(con.ko,x,y-14); }
+      c.font='500 11px '+getComputedStyle(document.body).fontFamily; c.fillStyle='rgba(234,240,251,.7)';
+      for(const o of this.pts){ if(o.st[2]<=1.0 && o.st[3]){ c.fillText(o.st[3].split(' (')[0], o.x, o.y+16); } } }
+    c.restore();
+    // horizon & directions
+    c.strokeStyle='rgba(126,166,222,.5)'; c.lineWidth=1.5; c.beginPath(); c.arc(cx,cy,R,0,7); c.stroke();
+    c.font='700 15px '+getComputedStyle(document.body).fontFamily; c.fillStyle='#f2c23a'; c.textAlign='center'; c.textBaseline='middle';
+    c.fillText('북',cx,cy-R-12); c.fillText('남',cx,cy+R+12); c.fillText('동',cx-R-14,cy); c.fillText('서',cx+R+14,cy); c.textBaseline='alphabetic';
+    c.font='500 12px "IBM Plex Mono",monospace'; c.textAlign='left'; c.fillStyle='rgba(234,240,251,.8)';
+    const d=this.date; c.fillText(`${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`, 16, B.top+14);
+    c.fillText('북위 36.6° · 누워서 올려다본 하늘', 16, B.top+32);
+  },
+  pick(x,y){ let best=null,bd=1e9; for(const o of this.pts){ const d=Math.hypot(o.x-x,o.y-y); if(d<bd){bd=d;best=o;} } return bd<16?best:null; }
+};
+function showSkyTip(o,x,y){
+  const t=$('#cTip'); Sky.hover=o;
+  if(!o){ t.hidden=true; return; }
+  const st=o.st; t.innerHTML='';
+  t.append(h('div',{class:'tip-name'}, st[3] || '(이름 없는 별)', h('span',{}, ' · '+o.con.ko)));
+  if(!o.dso) t.append(h('div',{class:'tip-row'}, `밝기 ${st[2]}등급 · 눌러서 별자리 이야기 보기`));
+  if(st[4]) t.append(h('div',{class:'tip-fact'}, st[4]));
+  placeTip(t,x,y);
+}
+function skyInfo(){
+  const box=$('#cInfo'); box.innerHTML='';
+  const con=CONS.find(x=>x.id===Sky.sel);
+  if(!con){ box.innerHTML=INFO.sky; return; }
+  const named=Object.entries(con.stars).filter(([k,s])=>s[3]);
+  const story=h('div',{class:'story',hidden:true}, con.story.map(p=>h('p',{},p)));
+  const more=h('button',{class:'submit small',onclick:()=>{ story.hidden=!story.hidden; more.textContent= story.hidden?'자세히 보기':'이야기 접기'; if(!story.hidden) story.scrollIntoView({behavior:'smooth',block:'nearest'}); }},'자세히 보기');
+  box.append(
+    h('div',{class:'eyebrow'},'별자리'),
+    h('h2',{}, con.ko, h('span',{class:'la'}, ' '+con.la)),
+    h('p',{class:'note'}, '잘 보이는 때: '+con.season),
+    h('ul',{class:'facts star-list'}, named.map(([k,s])=>h('li',{}, h('span',{}, h('b',{},s[3]), s[4]?h('small',{},s[4]):null), h('span',{}, s[2]+'등급')))),
+    h('div',{class:'row'}, more, h('button',{class:'btn',onclick:()=>{ Sky.sel=null; skyInfo(); }},'다른 별자리 고르기')),
+    story);
+}
+function syncSkyCtrl(){ const d=Sky.date, di=$('#skyDate'), ti=$('#skyTime'); if(!di) return;
+  di.value=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  ti.value=`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+
 Rot.setup();
 C.cv.addEventListener('pointerdown', e=>{ const r=C.cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  if(C.scene==='solar'){ showSolarTip(Solar.pick(x,y),x,y); return; }
+  if(C.scene==='sky'){ const o=Sky.pick(x,y); showSkyTip(o,x,y); if(o){ Sky.sel=o.con.id; skyInfo(); } return; }
   if(C.scene==='expand'){ Exp.click(x,y); return; }
   if(['bh','micro','cluster'].includes(C.scene)){ Lens.drag=Lens.pick(x,y); if(Lens.drag){ C.cv.setPointerCapture(e.pointerId); } } });
-C.cv.addEventListener('pointermove', e=>{ if(!Lens.drag) return; const r=C.cv.getBoundingClientRect(), k=C.w/Lens.lw; Lens.drag.x=(e.clientX-r.left)/k; Lens.drag.y=(e.clientY-r.top)/k; });
+C.cv.addEventListener('pointermove', e=>{
+  if(e.pointerType==='mouse' && (C.scene==='solar'||C.scene==='sky')){ const r=C.cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+    if(C.scene==='solar') showSolarTip(Solar.pick(x,y),x,y); else showSkyTip(Sky.pick(x,y),x,y);
+    C.cv.style.cursor = $('#cTip').hidden ? '' : 'pointer'; return; }
+  if(!Lens.drag) return; const r=C.cv.getBoundingClientRect(), k=C.w/Lens.lw; Lens.drag.x=(e.clientX-r.left)/k; Lens.drag.y=(e.clientY-r.top)/k; });
 ['pointerup','pointercancel'].forEach(t=>C.cv.addEventListener(t,()=>Lens.drag=null));
 addEventListener('resize', ()=>{ if(current==='galaxy') G.resize(); if(current==='cosmos') C.resize(); });
 
@@ -872,10 +1282,11 @@ function loop(now){
   const dt=Math.min(0.05,(now-last)/1000); last=now;
   if(current==='galaxy' && G.w){ G.t+=dt; drawBg(dt); drawFg(now); }
   if(current==='cosmos' && C.w){ if(!C.paused) C.t+=dt; const c=C.ctx;
-    if(C.scene==='expand') Exp.draw(c,dt); else if(C.scene==='rotate') Rot.draw(c,dt); else Lens.draw(c,dt); }
+    if(C.scene==='sky') Sky.draw(c,dt); else if(C.scene==='solar') Solar.draw(c,dt); else if(C.scene==='expand') Exp.draw(c,dt); else if(C.scene==='rotate') Rot.draw(c,dt); else Lens.draw(c,dt); }
   requestAnimationFrame(loop);
 }
-setScene('expand');
+setScene('sky');
+C.cv.addEventListener('pointerleave',()=>{ if(C.scene==='solar'||C.scene==='sky'){ $('#cTip').hidden=true; Solar.hover=null; Sky.hover=null; } });
 show(location.hash.slice(1)||'galaxy');
 
 requestAnimationFrame(loop);
